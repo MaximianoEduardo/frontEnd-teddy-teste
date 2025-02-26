@@ -1,0 +1,32 @@
+<div class="h-screen w-screen bg-[#F5F5F5] flex justify-center items-center">
+    <form class="flex flex-col w-[512px] gap-5" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+        <div class="w-full flex justify-center text-[36px]">
+            <h1>
+                Olá, seja bem-vindo!
+            </h1>
+        </div>
+
+
+        <input class="h-[60px] text-[#AAAAAA] border-[#D9D9D9] border-2 px-5 py-4 border-solid rounded-sm" 
+               type="text" 
+               name="name" 
+               id="name"
+               formControlName="name"
+               placeholder="Digite seu nome: "
+        />
+
+        <button type="submit" class="bg-[#EC6724] h-14 text-white font-bold text-[24px]">
+            Entrar 
+        </button>
+
+        <div *ngIf="profileForm.hasError"
+              class="alert alert-danger text-red-400">
+            <div *ngIf="name?.hasError('required')">
+              Necessario adicionar um nome.
+            </div>
+            
+        </div>
+    </form>
+</div>
+
