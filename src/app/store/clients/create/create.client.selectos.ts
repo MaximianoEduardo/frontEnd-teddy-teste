@@ -1,9 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import {  responseBody } from '../../interfaces/client';
-import { clientsFeatureKey } from './clients.reducers';
+import {  clientResponseBody } from '../../../interfaces/client';
+import { clientsFeatureKey } from './create.client.reducers';
 
 export interface FeatureState {
-  response: responseBody
+  response: clientResponseBody
 }
 
 export const selectDashboardState = createFeatureSelector<FeatureState>(clientsFeatureKey);
@@ -11,6 +11,6 @@ export const selectDashboardState = createFeatureSelector<FeatureState>(clientsF
 
 export const selectAllClientes = createSelector(
   selectDashboardState,
-  (state) => state.response?.clients
+  (state) => state.response
 );
 

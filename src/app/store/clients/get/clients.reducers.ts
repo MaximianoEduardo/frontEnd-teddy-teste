@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { clientResponseBody } from "../../interfaces/client";
+import { clientResponseBody } from "../../../interfaces/client";
 import { getAllClients, getAllClientsSucess, getAllClientsFail } from "./clients.actions";
 
 export const clientsFeatureKey = 'clients';
