@@ -1,5 +1,5 @@
 import { HttpClient, HttpEvent, HttpResponse } from "@angular/common/http";
-import { clientResponseBody, responseBody } from "../interfaces/client";
+import { clientResponseBody, createUserBody, responseBody } from "../../interfaces/client";
 import { catchError, map, Observable, throwError } from "rxjs";
 import { Injectable } from "@angular/core";
 
@@ -43,6 +43,23 @@ export default class CustomHttpClient {
                 return throwError(error);
             })
         );
+    }
+
+    createClient(payload: createUserBody): Observable<clientResponseBody>{
+        return this.http.post<clientResponseBody>('users', payload, {
+            observe: 'response'
+        }).pipe(
+            map((response: HttpResponse<clientResponseBody>) => {
+                if(response.body){
+                    return response.body
+                } else {
+                    throw new Error('Falha a buscar dados');
+                }
+            }),
+            catchError(error => {
+                return throwError(error);
+            })
+        )
     }
 
 }
