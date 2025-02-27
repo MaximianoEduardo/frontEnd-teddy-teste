@@ -46,10 +46,11 @@ export default class CustomHttpClient {
     }
 
     createClient(payload: createUserBody): Observable<clientResponseBody>{
-        return this.http.post<clientResponseBody>('users', payload, {
+        return this.http.post<clientResponseBody>('/api/users', payload, {
             observe: 'response'
         }).pipe(
             map((response: HttpResponse<clientResponseBody>) => {
+                console.log('chegou na api')
                 if(response.body){
                     return response.body
                 } else {

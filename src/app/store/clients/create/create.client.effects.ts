@@ -6,7 +6,7 @@ import { ClientsService } from '../../../services/clients.service';
 import { createClient, createClientSucess } from './create.client.actions';
 
 @Injectable()
-export class ClientsEffects {
+export class CreateClientsEffects {
   private actions$ = inject(Actions);
   private clientsService = inject(ClientsService);
 

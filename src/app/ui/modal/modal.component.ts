@@ -4,6 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { NgxCurrencyDirective } from "ngx-currency";
 import { Store } from '@ngrx/store';
+import { createClient } from '../../store/clients/create/create.client.actions';
 
 @Component({
   selector: 'app-modal',
@@ -31,7 +32,7 @@ export class ModalComponent implements OnInit{
       salary: new FormControl(null, [
         Validators.required
       ]),
-      company: new FormControl(null, [
+      companyValuation: new FormControl(null, [
         Validators.required
       ]),
     })
@@ -43,7 +44,17 @@ export class ModalComponent implements OnInit{
 
   // Método para enviar o formulário
   onSubmit() {
-    this.store.dispatch
+    if (this.newClientForm.valid) {
+      const newClient = this.newClientForm.value;
+      this.store.dispatch(createClient({ payload: newClient }));
+      this.closeModal();
+    } else {
+      // Handle form errors
+      Object.keys(this.newClientForm.controls).forEach(field => {
+        const control = this.newClientForm.get(field);
+        control?.markAsTouched({ onlySelf: true });
+      });
+    }
   }
 
 }

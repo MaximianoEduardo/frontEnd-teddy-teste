@@ -11,5 +11,10 @@
   top: 50%;
   transform: translateY(-50%);
 }
+
+.absolute-transform-center{
+  left: 50%;
+  transform: translateX(-50%);
+}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

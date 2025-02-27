@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as ClientActions from '../../../store/clients/clients.actions';
+import * as ClientActions from '../../../store/clients/get/clients.actions';
 import { ClientListComponent } from "../../client-list/client-list.component";
 
 @Component({
@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-    this.store.dispatch(ClientActions.getAllClients({page: 1, limit: 16}))
+    this.store.dispatch(ClientActions.getAllClients({page: 1, limit: 35}))
   }
 
 }
