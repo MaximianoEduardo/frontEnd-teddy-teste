@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { clientResponseBody } from "../../interfaces/client";
+import {  responseBody } from "../../interfaces/client";
 
 export const getAllClients = createAction(
     '[Dashboard] Get All Users',
@@ -8,7 +8,7 @@ export const getAllClients = createAction(
 
 export const getAllClientsSucess = createAction(
    '[Dashboard] Get All Users Sucess',
-    props<{ clients: clientResponseBody[] }>()
+    props<{ response: responseBody }>()
 );
 
 export const getAllClientsFail = createAction(

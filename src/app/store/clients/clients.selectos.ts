@@ -1,17 +1,16 @@
-import { createSelector } from '@ngrx/store';
-import { clientResponseBody } from '../../interfaces/client';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import {  responseBody } from '../../interfaces/client';
+import { clientsFeatureKey } from './clients.reducers';
 
 export interface FeatureState {
-  clients: clientResponseBody[]
+  response: responseBody
 }
 
-export interface ClientsState {
-  feature: FeatureState;
-}
+export const selectDashboardState = createFeatureSelector<FeatureState>(clientsFeatureKey);
 
-export const selectFeature = (state: ClientsState) => state.feature;
 
-export const selectClientsAll = createSelector(
-  selectFeature,
-  (state: FeatureState) => state.clients
+export const selectAllClientes = createSelector(
+  selectDashboardState,
+  (state) => state.response?.clients
 );
+

@@ -1,26 +1,38 @@
 import { createReducer, on } from "@ngrx/store";
 import { clientResponseBody } from "../../interfaces/client";
-import * as ClientesActions from "./clients.actions";
+import { getAllClients, getAllClientsSucess, getAllClientsFail } from "./clients.actions";
 
 export const clientsFeatureKey = 'clients';
 
 export interface initialState {
-    clients: clientResponseBody[]
+    clients: clientResponseBody[];
+    currentPage: number,
+    totalPages: number,
+    error?: string
 }
 export const initialState: initialState = {
-    clients: []
+    clients: [],
+    currentPage: 1,
+    totalPages: 1
 };
 
-export const clientdReducer = createReducer(
+export const clientReducer = createReducer(
         initialState,
-        on(ClientesActions.getAllClients, state => ({
+        on(getAllClients, (state, { page, limit }) => ({
             ...state,
+            page: page,
+            limit: limit
         })),
-        on(ClientesActions.getAllClientsSucess, (state, { clients }) => ({
+        on(getAllClientsSucess, (state, { response }) => ({
+            
             ...state,
-            clients: clients
+            response: {
+                clients: response.clients,
+                currentPage: response.currentPage,
+                totalPages: response.totalPages
+            }
         })),
-        on(ClientesActions.getAllClientsFail, (state, { error }) => ({
+        on(getAllClientsFail, (state, { error }) => ({
             ...state,
             error: error
         })

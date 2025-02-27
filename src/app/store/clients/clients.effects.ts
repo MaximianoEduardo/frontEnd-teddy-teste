@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
-import { map, exhaustMap, catchError } from 'rxjs/operators';
+import { map, exhaustMap, catchError, tap } from 'rxjs/operators';
 import { ClientsService } from '../../services/clients.service';
-import * as ClientActions from './clients.actions';
+import { getAllClients, getAllClientsSucess } from './clients.actions';
 
 @Injectable()
 export class ClientsEffects {
@@ -12,11 +12,13 @@ export class ClientsEffects {
 
     loadClients$ = createEffect(() => {
         return this.actions$.pipe(
-            ofType(ClientActions.getAllClients),
+            ofType(getAllClients),
             exhaustMap(({page, limit}) => this.clientsService.getAll(page, limit)
             .pipe(
-                map(clients => (ClientActions.getAllClientsSucess({ clients }))),
-                catchError(() => EMPTY)
+                tap(() => console.log('eee')),
+                map(response => (getAllClientsSucess({ response }))),
+                tap((clients) => console.log('Obj: ', clients)),
+                catchError((error) => EMPTY)
             ))
         );
         },{ functional: true }
