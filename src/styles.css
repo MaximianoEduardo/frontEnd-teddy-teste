@@ -4,4 +4,12 @@
 
 @theme {
   --font-inter: "Inter", sans-serif; 
+  --container-teddy: 1440px
 }
+
+.absolute-transform{
+  top: 50%;
+  transform: translateY(-50%);
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
