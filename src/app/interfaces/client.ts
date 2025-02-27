@@ -12,3 +12,9 @@ export interface responseBody {
     currentPage: number,
     totalPages: number,
 }
+
+export interface createUserBody{
+    name: string
+    salary: number;
+    companyValuation: number;
+}
