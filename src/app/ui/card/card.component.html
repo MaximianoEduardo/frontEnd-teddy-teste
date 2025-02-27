@@ -1,0 +1,36 @@
+<div class="card-wrapper h-[138px] min-w-[285px] p-3.5 rounded-sm bg-white shadow-[0px_0px_4px_0px_#0000001A]" [id]="client.id">
+
+    <div class="flex justify-center flex-col items-center gap-2.5 pb-[15px]">
+
+        <div class="card-tittle">
+            <span class="text-black font-bold">
+                {{ client.name }}
+            </span>
+        </div>
+
+        <div class="card-info">
+            <span>Salário: {{ client.salary | currency: 'BRL' }} </span>
+        </div>
+
+
+        <div class="card-info">
+            <span>Empresa: {{ client.companyValuation | currency: 'BRL' }} </span>
+        </div>
+
+        <div class="card-actions flex justify-between items-center px-4">
+
+            <mat-icon aria-hidden="false" aria-label="plus icon" fontIcon="add"></mat-icon>
+
+
+            <span> editIcon </span>
+
+            <span> deleteIcon </span>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
