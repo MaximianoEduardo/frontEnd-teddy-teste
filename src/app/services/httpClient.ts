@@ -1,5 +1,5 @@
 import { HttpClient, HttpEvent, HttpResponse } from "@angular/common/http";
-import { clientResponseBody } from "../interfaces/client";
+import { clientResponseBody, responseBody } from "../interfaces/client";
 import { catchError, map, Observable, throwError } from "rxjs";
 import { Injectable } from "@angular/core";
 
@@ -20,19 +20,20 @@ export default class CustomHttpClient {
     }
 
 
-    getAllClients(page: number, limit: number): Observable<clientResponseBody[]>{
+    getAllClients(page: number, limit: number): Observable<responseBody>{
 
         const urlClients = `/api/` + `users?page=${page}&limit=${limit}`;
 
-        return this.http.get<clientResponseBody[]>(urlClients, {
+        return this.http.get<responseBody>(urlClients, {
             headers: {
                 'Content-Type': this.defaultConfig.contentType,
                 'Aaccept': this.defaultConfig.accept
             },
             observe: 'response'
         }).pipe(
-            map((response: HttpResponse<clientResponseBody[]>) => {
+            map((response: HttpResponse<responseBody>) => {
                 if (response.body) {
+                    console.log('sucesso', response.body)
                     return response.body;
                 } else {
                     throw new Error('Falha a buscar dados');

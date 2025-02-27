@@ -7,3 +7,8 @@ export interface clientResponseBody {
     updatedAt: Date
 }
 
+export interface responseBody {
+    clients: clientResponseBody[];
+    currentPage: number,
+    totalPages: number,
+}

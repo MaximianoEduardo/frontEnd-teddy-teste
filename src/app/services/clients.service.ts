@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import CustomHttpClient from './httpClient';
 import { Observable } from 'rxjs/internal/Observable';
-import { clientResponseBody } from '../interfaces/client';
+import { clientResponseBody, responseBody } from '../interfaces/client';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class ClientsService {
   ) { }
 
 
-  getAll(page: number, limit: number): Observable<clientResponseBody[]>{
+  getAll(page: number, limit: number): Observable<responseBody>{
     return this.customHttp.getAllClients(page, limit)
   }
 }
