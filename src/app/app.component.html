@@ -5,3 +5,24 @@
     <router-outlet />
 
 </main>
+
+<ng-container
+  *ngIf="'authenticate' !== this.currentUrl; then dashboardAuthenticate; else authenticate">
+</ng-container>
+
+<ng-template #dashboardAuthenticate>
+  <div id="dashboard-content-wrapper" class="dashboard-wrapper bg-[#D9D9D9] w-full h-screen">
+        <div class="row extranet-outlet-wrapper">
+
+            <app-header />
+
+            <app-dashboard />
+
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #authenticate>
+  <router-outlet></router-outlet>
+</ng-template>
