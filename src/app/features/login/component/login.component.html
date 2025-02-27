@@ -20,12 +20,11 @@
             Entrar 
         </button>
 
-        <div *ngIf="profileForm.hasError"
-              class="alert alert-danger text-red-400">
-            <div *ngIf="name?.hasError('required')">
-              Necessario adicionar um nome.
+        <div *ngIf="profileForm.get('name')?.invalid && (profileForm.get('name')?.dirty || profileForm.get('name')?.touched)"
+              class="text-red-400">
+            <div *ngIf="profileForm.get('name')?.hasError('required')">
+              Necessário adicionar um nome.
             </div>
-            
         </div>
     </form>
 </div>

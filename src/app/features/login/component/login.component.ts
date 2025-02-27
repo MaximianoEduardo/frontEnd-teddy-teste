@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -27,16 +27,10 @@ export class LoginComponent implements OnInit {
 
 
   onSubmit(){
-
     this.profileForm.markAllAsTouched();
     if (this.profileForm.valid) {
-      this.router.navigateByUrl('/dasboard')
-    } else {
-      console.log(this.profileForm)
-      console.log('Form is not valid');
+      this.router.navigateByUrl('/dashboard')
     }
-
-
   }
 
   get name() {
