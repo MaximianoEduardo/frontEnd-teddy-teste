@@ -7,6 +7,7 @@ import { CustomStoreModule } from './store/store.module';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { isDevMode } from '@angular/core';
+import { NgxCurrencyInputMode, provideEnvironmentNgxCurrency } from 'ngx-currency';
 
 
 export const appConfig: ApplicationConfig = {
@@ -20,10 +21,21 @@ export const appConfig: ApplicationConfig = {
       maxAge: 25, 
       logOnly: !isDevMode(), 
     }),
+    provideEnvironmentNgxCurrency({
+      align: "left",
+      decimal: ",",
+      precision: 2,
+      prefix: "R$ ",
+      thousands: ".",
+      min: null,
+      max: null,
+      inputMode: NgxCurrencyInputMode.Financial,
+    }), 
     importProvidersFrom(
       StoreModule.forRoot({}),
       EffectsModule.forRoot([]),
-      CustomStoreModule,     
+      CustomStoreModule, 
+      
     )
 ]
 };

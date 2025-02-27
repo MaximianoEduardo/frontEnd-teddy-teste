@@ -24,7 +24,6 @@ export class AppComponent {
   ){
     this.currentUrl = this.router.url;
 
-    console.log(this.currentUrl)
   }
 
 
