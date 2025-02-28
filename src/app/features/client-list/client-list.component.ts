@@ -1,20 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { clientResponseBody } from '../../interfaces/client';
-import { selectAllClientes } from '../../store/clients/get/clients.selectos';
-import { exhaustMap, Observable, of, shareReplay } from 'rxjs';
+import { selectAllClientes, selectStateUpdating } from '../../store/clients/get/clients.selectos';
+import { exhaustMap, map, Observable, of, shareReplay, Subscription, tap } from 'rxjs';
 import { CardComponent } from "../../ui/card/card.component";
 import { ModalService } from '../../services/modal/modal.service';
 import { ModalComponent } from "../../ui/modal/modal.component";
+import { formEnum } from '../../enum/form.enum';
+import { LoadingComponent } from "../../ui/loading/loading.component";
 
 @Component({
   selector: 'app-client-list',
-  imports: [CommonModule, CardComponent, ModalComponent],
+  imports: [CommonModule, CardComponent, ModalComponent, LoadingComponent],
   templateUrl: './client-list.component.html',
   styleUrl: './client-list.component.css'
 })
-export class ClientListComponent implements OnInit{
+export class ClientListComponent implements OnInit {
 
   constructor(
     private store: Store,
@@ -22,25 +24,41 @@ export class ClientListComponent implements OnInit{
   ){}
 
   $clients: Observable<clientResponseBody[]> = of([]);
-  $clientsTotal: Observable<number> = of(0);
-
+  $isUpdating: Observable<boolean> = of(false);
+  $clientsTotal: Observable<number> | undefined = of(0);
+  isLoading: boolean = true;  
 
   ngOnInit(): void {
-    this.$clients = this.store.select(selectAllClientes).pipe(
-      shareReplay(1)
-    );
-
-
-    this.$clientsTotal = this.store.select(selectAllClientes).pipe(
+    // Carrega os clientes do store
+    const clients$ = this.store.select(selectAllClientes).pipe(
       shareReplay(1),
-      exhaustMap(async (client) => client?.length )
+      tap((clients) => {
+        this.isLoading = false; // Define isLoading como false após carregar os dados
+      })
     );
+
+
+    // Atribui os observables
+    this.$clients = clients$;
+    this.$clientsTotal = clients$.pipe(
+      map((clients) => clients?.length ) 
+    );
+
+    this.$isUpdating = this.store.select(selectStateUpdating).pipe(
+      tap((isUpdating) => {
+        this.isLoading = isUpdating;
+      })
+    );
+   
   }
 
 
   handleCreateClient(){
-    console.log('abrir Modal')
-    this.modalService.openModal();
+    this.modalService.openModal({
+      title: 'Criar cliente',
+      description: 'Criar cliente',
+      type: formEnum.create
+    });
   }
 
 }
