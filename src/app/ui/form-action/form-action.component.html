@@ -1,0 +1,59 @@
+<form class="w-full" [formGroup]="clientForm" (ngSubmit)="onSubmit(type().type)">
+    
+    <ng-container *ngIf="type().type === formDelete then formTemplateDeleteClient; else formTemplateCreateClient"></ng-container>
+
+    <div class="flex justify-end ">
+        <button type="submit"     
+        class="bg-[#EC6724] text-white font-bold cursor-pointer w-full px-4 py-2 rounded-sm">
+        {{ type().title }}
+</button>
+    </div>
+</form>
+
+
+<ng-template #formTemplateDeleteClient>
+    <div class="mb-2.5" [formGroup]="clientForm" >
+        <span> {{ type().description }} <strong> {{ type().nameOfClient }} </strong> </span>
+    </div>
+</ng-template>
+
+
+<ng-template #formTemplateCreateClient>
+    <div [formGroup]="clientForm" >
+        <div class="mb-2.5" >
+            <label for="name" class="block text-sm font-medium text-[#AAAAAA]">
+                <input type="text" 
+                        placeholder="Digite seu nome:"
+                       id="name" name="name" 
+                       formControlName="name"
+                        class="mt-1 block w-full px-3 py-2 border-2 border-[#D9D9D9] rounded-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </label>
+           
+        </div>
+        <div class="mb-2.5">
+            <label for="salary" class="block text-sm font-medium text-[#AAAAAA]">
+                <input type="text"
+                        placeholder="Digite o salário:"
+                        currencyMask
+                        [options]="{ nullable: true, allowNegative: false, allowZero: false, }"
+                       id="salary" name="salary" 
+                       formControlName="salary"
+                class="mt-1 block w-full px-3 py-2 border-2 border-[#D9D9D9] rounded-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </label>
+            
+        </div>
+        <div class="mb-2.5">
+            <label for="company" class="block text-sm font-medium text-[#AAAAAA]">
+                <input type="text" 
+                        placeholder="Digite o valor da empresa:"
+                        currencyMask
+                        [options]="{ nullable: true, allowNegative: false, allowZero: false, }"
+                       id="companyValuation" name="companyValuation" 
+                       formControlName="companyValuation"
+                class="mt-1 block w-full px-3 py-2 border-2 border-[#D9D9D9] rounded-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </label>
+        </div>
+    </div>
+    
+</ng-template>
+
