@@ -1,9 +1,9 @@
 import { createAction, props } from "@ngrx/store";
-import {  clientResponseBody, createUserBody } from "../../../interfaces/client";
+import {  clientResponseBody, clientBody } from "../../../interfaces/client";
 
 export const createClient = createAction(
     '[Dashboard Formulario Criação] Create User',
-    props<{ payload: createUserBody }>()
+    props<{ payload: clientBody }>()
 );
 
 export const createClientSucess = createAction(

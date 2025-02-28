@@ -3,20 +3,19 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
 import { map, exhaustMap, catchError, tap } from 'rxjs/operators';
 import { ClientsService } from '../../../services/clients.service';
-import { createClient, createClientSucess } from './create.client.actions';
+import { editClient, editClientSucess } from './edit.client.actions';
 
 @Injectable()
-export class CreateClientsEffects {
+export class EditClientsEffects {
   private actions$ = inject(Actions);
   private clientsService = inject(ClientsService);
 
-    createClients$ = createEffect(() => {
+    editClients$ = createEffect(() => {
         return this.actions$.pipe(
-            ofType(createClient),
-            exhaustMap(({payload}) => this.clientsService.createClient(payload)
+            ofType(editClient),
+            exhaustMap(({payload}) => this.clientsService.editClient(payload)
             .pipe(
-                tap(() => console.log('eee')),
-                map(payload => (createClientSucess({ payload }))),
+                map(payload => (editClientSucess({ payload }))),
                 tap((client) => console.log('Obj: ', client)),
                 catchError((error) => EMPTY)
             ))

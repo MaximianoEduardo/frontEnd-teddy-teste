@@ -1,8 +1,8 @@
 import { createReducer, on } from "@ngrx/store";
 import { clientBody } from "../../../interfaces/client";
-import { createClient, createClientFail, createClientSucess } from "./create.client.actions";
+import { editClient, editClientFail, editClientSucess } from "./edit.client.actions";
 
-export const createClientsFeatureKey = 'createClients';
+export const editClientsFeatureKey = 'editClients';
 
 export interface initialState {
     payload: clientBody
@@ -15,18 +15,18 @@ export const initialState: initialState = {
     }
 };
 
-export const createClientReducer = createReducer(
+export const editClientReducer = createReducer(
         initialState,
-        on(createClient, (state, { payload }) => ({
+        on(editClient, (state, { payload }) => ({
             ...state,
             payload
         })),
-        on(createClientSucess, (state, { payload }) => ({
+        on(editClientSucess, (state, { payload }) => ({
             
             ...state,
             payload: payload
         })),
-        on(createClientFail, (state, { error }) => ({
+        on(editClientFail, (state, { error }) => ({
             ...state,
             error: error
         })
