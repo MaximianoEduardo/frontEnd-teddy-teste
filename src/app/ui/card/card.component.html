@@ -1,5 +1,9 @@
 <div class="card-wrapper h-[150px] min-w-[285px] p-3.5 rounded-sm bg-white shadow-[0px_0px_4px_0px_#0000001A]" [id]="client.id">
 
+    <div *ngIf="isUpdating" class="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center rounded-sm">
+        <app-loading></app-loading>
+    </div>
+
     <div class="flex justify-center flex-col items-center gap-2.5 pb-[15px]">
 
         <div class="card-tittle">
@@ -19,7 +23,7 @@
 
         <div class="card-actions w-full flex justify-between items-center px-4">
 
-            <div class="cursor-pointer">
+            <div class="cursor-pointer plus">
                 <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <rect width="17" height="17" fill="url(#pattern0_2086_45)"/>
                     <defs>
@@ -30,7 +34,7 @@
                     </defs>
                 </svg>
             </div>
-            <div class="cursor-pointer">
+            <div class="cursor-pointer edit" (click)="modalService.openModal(editModal)">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <rect width="20" height="20" fill="url(#pattern0_2086_46)"/>
                     <defs>
@@ -41,7 +45,7 @@
                     </defs>
                 </svg>
             </div>
-            <div class="cursor-pointer">
+            <div class="cursor-pointer delete" (click)="modalService.openModal(deleteModal)">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <rect width="20" height="20" fill="url(#pattern0_2086_47)"/>
                     <defs>
