@@ -34,8 +34,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(
       StoreModule.forRoot({}),
       EffectsModule.forRoot([]),
-      CustomStoreModule, 
-      
-    )
-]
+      CustomStoreModule,
+    ),
+  ]
 };

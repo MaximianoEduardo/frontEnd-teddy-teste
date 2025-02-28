@@ -6,11 +6,11 @@ export const deleteClient = createAction(
 );
 
 export const deleteClientSucess = createAction(
-    '[Dashboard Formulario Delete] Create User',
+    '[Dashboard Formulario Delete Sucesso] Delete User Sucesso',
     props<{ response: string }>()
 );
 
 export const deleteClientFail = createAction(
-    '[Dashboard Formulario Delete] Create User',
+    '[Dashboard Formulario Delete Fail] Delete User Fail',
     props<{ error: any }>()
 )

@@ -5,6 +5,8 @@ import { ModalService } from '../../services/modal/modal.service';
 import { formType } from '../../interfaces/forms';
 import { formEnum } from '../../enum/form.enum';
 import { LoadingComponent } from "../loading/loading.component";
+import { Store } from '@ngrx/store';
+import { selectClient } from '../../store/clients/seleted/select.client.actions';
 
 @Component({
   selector: 'app-card',
@@ -57,7 +59,15 @@ export class CardComponent {
 
   }
 
+  
+  handleClickSelectClient(payload: clientResponseBody){
+    this.store.dispatch(selectClient({
+      payload
+    }))
+  }
+
   constructor(
-    public modalService: ModalService
+    public modalService: ModalService,
+    private store: Store
   ){}
 }

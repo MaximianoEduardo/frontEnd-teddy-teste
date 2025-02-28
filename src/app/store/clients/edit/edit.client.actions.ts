@@ -7,11 +7,11 @@ export const editClient = createAction(
 );
 
 export const editClientSucess = createAction(
-    '[Dashboard Formulario Edicao] Edit User',
+    '[Dashboard Formulario Edicao Sucesso] Edit User Sucesso',
     props<{ payload: clientResponseBody }>()
 );
 
 export const editClientFail = createAction(
-    '[Dashboard Formulario Edicao] Edit User',
+    '[Dashboard Formulario Edicao Fail] Edit User Fail',
     props<{ error: any }>()
 )

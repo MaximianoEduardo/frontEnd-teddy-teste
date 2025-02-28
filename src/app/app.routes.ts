@@ -9,4 +9,8 @@ export const routes: Routes = [
         path: 'dashboard',
         loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule)
     },
+    {
+        path: 'dashboard/selected-clients',
+        loadChildren: () => import('./features/selected-clients/selected-clients.module').then(m => m.SelectedClientsModule)
+    },
 ];

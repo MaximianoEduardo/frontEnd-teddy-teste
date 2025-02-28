@@ -7,11 +7,11 @@ export const createClient = createAction(
 );
 
 export const createClientSucess = createAction(
-    '[Dashboard Formulario Criação] Create User',
+    '[Dashboard Formulario Criação Sucesso] Create User Sucesso',
     props<{ payload: clientResponseBody }>()
 );
 
 export const createClientFail = createAction(
-    '[Dashboard Formulario Criação] Create User',
+    '[Dashboard Formulario Criação Falha] Create User Falha',
     props<{ error: any }>()
 )
