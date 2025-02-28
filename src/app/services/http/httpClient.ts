@@ -1,5 +1,5 @@
-import { HttpClient, HttpEvent, HttpResponse } from "@angular/common/http";
-import { clientResponseBody, createUserBody, responseBody } from "../../interfaces/client";
+import { HttpClient, HttpResponse } from "@angular/common/http";
+import { clientResponseBody, clientBody, responseBody } from "../../interfaces/client";
 import { catchError, map, Observable, throwError } from "rxjs";
 import { Injectable } from "@angular/core";
 
@@ -33,7 +33,6 @@ export default class CustomHttpClient {
         }).pipe(
             map((response: HttpResponse<responseBody>) => {
                 if (response.body) {
-                    console.log('sucesso', response.body)
                     return response.body;
                 } else {
                     throw new Error('Falha a buscar dados');
@@ -45,14 +44,48 @@ export default class CustomHttpClient {
         );
     }
 
-    createClient(payload: createUserBody): Observable<clientResponseBody>{
+    createClient(payload: clientBody): Observable<clientResponseBody>{
         return this.http.post<clientResponseBody>('/api/users', payload, {
             observe: 'response'
         }).pipe(
             map((response: HttpResponse<clientResponseBody>) => {
-                console.log('chegou na api')
                 if(response.body){
                     return response.body
+                } else {
+                    throw new Error('Falha a buscar dados');
+                }
+            }),
+            catchError(error => {
+                return throwError(error);
+            })
+        )
+    }
+
+
+    editClient(payload: clientBody): Observable<clientResponseBody>{
+        return this.http.patch<clientResponseBody>('/api/users', payload, {
+            observe: 'response'
+        }).pipe(
+            map((response: HttpResponse<clientResponseBody>) => {
+                if(response.body){
+                    return response.body
+                } else {
+                    throw new Error('Falha ao alterar dados');
+                }
+            }),
+            catchError(error => {
+                return throwError(error);
+            })
+        )
+    }
+
+
+    deleteClient(id: number): Observable<string>{
+        console.log('chegou no delete', id)
+        return this.http.delete(`/api/users/${id}`, { observe: 'response' }).pipe(
+            map((response: HttpResponse<any>) => {
+                if(response.body){
+                    return response.body;
                 } else {
                     throw new Error('Falha a buscar dados');
                 }

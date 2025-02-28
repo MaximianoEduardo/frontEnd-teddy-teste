@@ -13,7 +13,7 @@ export interface responseBody {
     totalPages: number,
 }
 
-export interface createUserBody{
+export interface clientBody{
     name: string
     salary: number;
     companyValuation: number;
