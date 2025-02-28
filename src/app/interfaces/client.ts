@@ -1,3 +1,5 @@
+import { formEnum } from "../enum/form.enum";
+
 export interface clientResponseBody {
     id: number;
     name: string
@@ -11,6 +13,11 @@ export interface responseBody {
     clients: clientResponseBody[];
     currentPage: number,
     totalPages: number,
+}
+
+export interface stateUpdate{
+    isloading: boolean;
+    typeOfUpdate: formEnum;
 }
 
 export interface clientBody{

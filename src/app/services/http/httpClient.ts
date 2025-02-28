@@ -62,8 +62,8 @@ export default class CustomHttpClient {
     }
 
 
-    editClient(payload: clientBody): Observable<clientResponseBody>{
-        return this.http.patch<clientResponseBody>('/api/users', payload, {
+    editClient(id: number ,payload: clientBody): Observable<clientResponseBody>{
+        return this.http.patch<clientResponseBody>(`/api/users/${id}`, payload, {
             observe: 'response'
         }).pipe(
             map((response: HttpResponse<clientResponseBody>) => {

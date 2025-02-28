@@ -21,8 +21,8 @@ export class ClientsService {
     return this.customHttp.createClient(payload);
   }
 
-  editClient(payload: clientBody): Observable<clientResponseBody>{
-    return this.customHttp.editClient(payload);
+  editClient(id: number, payload: clientBody): Observable<clientResponseBody>{
+    return this.customHttp.editClient(id ,payload);
   }
 
   deleteClient(id: number): Observable<string>{
