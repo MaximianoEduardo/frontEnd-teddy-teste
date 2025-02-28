@@ -4,10 +4,13 @@ import { EMPTY } from 'rxjs';
 import { map, exhaustMap, catchError, tap } from 'rxjs/operators';
 import { ClientsService } from '../../../services/clients.service';
 import { createClient, createClientSucess } from './create.client.actions';
+import { Store } from '@ngrx/store';
+import { getAllClients } from '../get/clients.actions';
 
 @Injectable()
 export class CreateClientsEffects {
   private actions$ = inject(Actions);
+  private store = inject(Store);
   private clientsService = inject(ClientsService);
 
     createClients$ = createEffect(() => {
@@ -15,7 +18,6 @@ export class CreateClientsEffects {
             ofType(createClient),
             exhaustMap(({payload}) => this.clientsService.createClient(payload)
             .pipe(
-                tap(() => console.log('eee')),
                 map(payload => (createClientSucess({ payload }))),
                 tap((client) => console.log('Obj: ', client)),
                 catchError((error) => EMPTY)
@@ -23,4 +25,11 @@ export class CreateClientsEffects {
         );
         },{ functional: true }
     );
+
+    updateClientsListAfterCreate$ = createEffect(() => {
+                return this.actions$.pipe(
+                    ofType(createClientSucess),
+                    map(() => this.store.dispatch(getAllClients({ page: 1, limit: 16, isloading: true })))
+                );
+            }, { functional: true, dispatch: false });
 }

@@ -17,7 +17,6 @@ export const deleteClientReducer = createReducer(
             id
         })),
         on(deleteClientSucess, (state, { response }) => ({
-            
             ...state,
             response
         })),

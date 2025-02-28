@@ -3,7 +3,7 @@ import {  clientResponseBody, clientBody } from "../../../interfaces/client";
 
 export const editClient = createAction(
     '[Dashboard Formulario Edicao] Edit User',
-    props<{ payload: clientBody }>()
+    props<{ id:number, payload: clientBody }>()
 );
 
 export const editClientSucess = createAction(
