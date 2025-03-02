@@ -7,6 +7,7 @@ import { formEnum } from '../../enum/form.enum';
 import { LoadingComponent } from "../loading/loading.component";
 import { Store } from '@ngrx/store';
 import { selectClient } from '../../store/clients/seleted/select.client.actions';
+import { ClientDispatchService } from '../../services/events.service';
 
 @Component({
   selector: 'app-card',
@@ -61,13 +62,11 @@ export class CardComponent {
 
   
   handleClickSelectClient(payload: clientResponseBody){
-    this.store.dispatch(selectClient({
-      payload
-    }))
+    this.dispatchService.dispatchSelectClient(payload);
   }
 
   constructor(
     public modalService: ModalService,
-    private store: Store
+    public dispatchService: ClientDispatchService,
   ){}
 }
