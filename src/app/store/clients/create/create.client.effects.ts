@@ -6,11 +6,13 @@ import { ClientsService } from '../../../services/clients.service';
 import { createClient, createClientSucess } from './create.client.actions';
 import { Store } from '@ngrx/store';
 import { getAllClients } from '../get/clients.actions';
+import { ClientDispatchService } from '../../../services/events.service';
 
 @Injectable()
 export class CreateClientsEffects {
   private actions$ = inject(Actions);
   private store = inject(Store);
+  public dispatchService = inject(ClientDispatchService);
   private clientsService = inject(ClientsService);
 
     createClients$ = createEffect(() => {
@@ -29,7 +31,7 @@ export class CreateClientsEffects {
     updateClientsListAfterCreate$ = createEffect(() => {
                 return this.actions$.pipe(
                     ofType(createClientSucess),
-                    map(() => this.store.dispatch(getAllClients({ page: 1, limit: 16, isloading: true })))
+                    map(() => this.dispatchService.dispatchGetAllClients( 1, 16, true ))
                 );
             }, { functional: true, dispatch: false });
 }

@@ -6,11 +6,13 @@ import { ClientsService } from '../../../services/clients.service';
 import { deleteClient, deleteClientSucess } from './delete.client.actions';
 import { Store } from '@ngrx/store';
 import { getAllClients } from '../get/clients.actions';
+import { ClientDispatchService } from '../../../services/events.service';
 
 @Injectable()
 export class DeleteClientsEffects {
   private actions$ = inject(Actions);
   private store = inject(Store);
+  public dispatchService = inject(ClientDispatchService);
   private clientsService = inject(ClientsService);
 
     deleteClient$ = createEffect(() => {
@@ -19,7 +21,6 @@ export class DeleteClientsEffects {
             exhaustMap(({id}) => this.clientsService.deleteClient(id)
             .pipe(
                 map(response => (deleteClientSucess({ response }))),
-                tap((client) => console.log('Obj: ', client)),
                 catchError((error) => EMPTY)
             ))
         );
@@ -29,7 +30,7 @@ export class DeleteClientsEffects {
     updateClientsListAfterDelete$ = createEffect(() => {
             return this.actions$.pipe(
                 ofType(deleteClientSucess),
-                map(() => this.store.dispatch(getAllClients({ page: 1, limit: 16, isloading: true })))
+                map(() => this.dispatchService.dispatchGetAllClients( 1, 16, true ))
             );
         }, { functional: true, dispatch: false });
 }

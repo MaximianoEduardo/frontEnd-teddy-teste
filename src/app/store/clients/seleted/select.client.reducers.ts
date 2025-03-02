@@ -5,7 +5,7 @@ import { selectClient, showAllSelectedClients, removeSelectedClient } from "./se
 export const selectedClientsFeatureKey = 'selectClients';
 
 export interface initialState {
-    payload: clientResponseBody[]
+    payload: clientResponseBody[];
 }
 export const initialState: initialState = {
     payload: []
@@ -15,12 +15,11 @@ export const selectedClientReducer = createReducer(
     initialState,
     on(selectClient, (state, { payload }) => ({
         ...state,
-        payload: [
-            payload
-        ]
+        payload: [...state.payload, payload],
     })),
     on(showAllSelectedClients, (state) => ({
         ...state,
+        
     })),
     on(removeSelectedClient, (state, { payload }) => ({
         ...state,

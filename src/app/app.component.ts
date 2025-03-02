@@ -1,10 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './ui/header/header.component';
-import { DashboardComponent } from "./features/dashboard/component/dashboard.component";
 import { filter } from 'rxjs';
-import { SelectedClientsComponent } from "./features/selected-clients/selected-clients.component";
 import { ToasterComponent } from "./ui/toaster/toaster.component";
 
 @Component({
@@ -12,7 +9,7 @@ import { ToasterComponent } from "./ui/toaster/toaster.component";
   imports: [
     RouterOutlet,
     CommonModule,
-    ToasterComponent
+    ToasterComponent,
 ],
   templateUrl: './app.component.html',
 })
