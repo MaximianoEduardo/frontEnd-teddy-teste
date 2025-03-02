@@ -1,59 +1,91 @@
 # Teddy
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.7.
+## 💻 Sobre o projeto
 
-## Development server
+Teste para candidatura - Front End Teddy
 
-To start a local development server, run:
+---
+
+## ⚙️ Requisitos
+
+- [x] Utilize TypeScript.
+- [x] Utilizar Angular (versão mais recente).
+- [x] Crie uma arquitetura de micro-frontends.
+- [x] A aplicação deverá ser responsiva.
+- [] Utilizar Docker para containerizar a aplicação.
+- [x] Fazer deploy na Vercel.
+- [x] Crie um README explicando como rodar a aplicação.
+- [] Gravar um vídeo demonstrando toda a aplicação.
+
+#### Sinta-se livre para incluir melhorias.
+
+---
+
+### Preview
+
+### Home
+
+
+
+### Dashboard
+
+
+
+
+---
+
+
+## 💻 Live Code
+
+O projeto está hospedado em: **[LiveCode](https://front-end-teddy-teste.vercel.app/)**
+
+---
+
+## 🚀 Como executar o projeto
+
+### Pré-requisitos
+
+Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
+[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/).
+Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
+
+#### 🧭 Rodando a aplicação
 
 ```bash
-ng serve
+
+# Clone este repositório
+$ git clone https://github.com/MaximianoEduardo/Teddy-Angular
+
+# Acesse a pasta do projeto no seu terminal/cmd
+$ cd Teddy-Angular
+
+# Instale as dependências
+$ npm install
+
+# Execute a aplicação em modo de desenvolvimento
+$ npm start
+
+# A aplicação será aberta na porta:4200 - acesse http://localhost:4200
+
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🛠 Tecnologias
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+As seguintes ferramentas foram usadas na construção do projeto:
 
-```bash
-ng generate component component-name
-```
+#### **Website**  ([Angular](https://angular.io/))
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- **[Angular](https://angular.io/)**
+- **[Bootstrap](https://getbootstrap.com/)**
+- **[Typescript](https://www.typescriptlang.org/)**
+- **[Redux](https://ngrx.io/)**
+- **[Tailwind](https://tailwindcss.com/)**
 
-```bash
-ng generate --help
-```
+> Veja o arquivo  [package.json](./package.json)
 
-## Building
 
-To build the project run:
+👋🏽 [Entre em contato!](https://www.linkedin.com/in/maximiano-eduardo/)
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
