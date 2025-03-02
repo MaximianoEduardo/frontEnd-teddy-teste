@@ -1,0 +1,18 @@
+<div id="dashboard-content-wrapper" class="dashboard-wrapper bg-[#D9D9D9] w-full h-screen">
+    <div class="row extranet-outlet-wrapper">
+      <app-header></app-header>
+
+      {{ clientsFromStore$ | async }}
+
+      <app-client-list [clients$]="clientsFromStore$"/>
+      <div>
+        <div class="w-full flex justify-center items-center py-8"></div>
+    <div>
+        
+    </div>
+    </div>
+  </div>
+
+
+
+
