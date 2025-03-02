@@ -1,3 +1,8 @@
-<app-client-list />
+<div id="dashboard-content-wrapper" class="dashboard-wrapper bg-[#D9D9D9] w-full h-screen">
+    <div class="row extranet-outlet-wrapper">
+      <app-header></app-header>
+      <app-client-list [clients$]="clientsFromStore$" />
+    </div>
+  </div>
 
 <app-toaster></app-toaster>

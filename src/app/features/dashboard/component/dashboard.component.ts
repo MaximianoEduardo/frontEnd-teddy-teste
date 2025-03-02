@@ -1,13 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as ClientActions from '../../../store/clients/get/clients.actions';
 import { ClientListComponent } from "../../client-list/client-list.component";
 import { ToasterComponent } from "../../../ui/toaster/toaster.component";
+import { HeaderComponent } from "../../../ui/header/header.component";
+import { Observable, of, map } from 'rxjs';
+import { clientResponseBody } from '../../../interfaces/client';
+import { selectAllClientes } from '../../../store/clients/get/clients.selectos';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, ClientListComponent, ToasterComponent],
+  imports: [CommonModule, ClientListComponent, ToasterComponent, HeaderComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -17,8 +20,13 @@ export class DashboardComponent implements OnInit{
     private store: Store
   ){}
 
+  clientsFromStore$: Observable<clientResponseBody[]> = of([]);
+  
   ngOnInit(): void {
-    this.store.dispatch(ClientActions.getAllClients({page: 1, limit: 35 , isloading: false}));
+    this.clientsFromStore$ = this.store.select(selectAllClientes).pipe(
+      map((clients) => clients)
+    );
   }
+
 
 }

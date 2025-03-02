@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
+import { ClientDispatchService } from '../../../services/events.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
   profileForm!: FormGroup;
 
   constructor(
-    private router: Router
+    private router: Router,
+    public dispatchService: ClientDispatchService
   ){}
 
 
@@ -29,7 +31,8 @@ export class LoginComponent implements OnInit {
   onSubmit(){
     this.profileForm.markAllAsTouched();
     if (this.profileForm.valid) {
-      this.router.navigateByUrl('/dashboard')
+      this.dispatchService.dispatchGetAllClients(1, 16, true );
+      this.router.navigate(['/dashboard'])
     }
   }
 

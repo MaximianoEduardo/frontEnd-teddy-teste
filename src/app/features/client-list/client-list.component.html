@@ -1,60 +1,48 @@
-<div>
-    <div class="w-full flex justify-center items-center py-8"></div>
-<div>
-    <div class="w-full flex justify-center items-center py-8">
-        <div class="w-(--container-teddy)">
-            
-            <div class="flex flex-col gap-2.5">
-    
-                <div class="filter-options flex justify-between items-center">
-                    <span> <strong>{{ $clientsTotal | async }}</strong>  clientes encontrados:  </span>
-    
-                    
-                    <div class="flex gap-[9px]">
-    
-                        <p> Clientes por página: </p>
-    
-                        <select>
-                            <option value="16">
-                                16
-                            </option>
-                        </select>
-                    </div>
-                </div>
-    
-                <div class="grid grid-cols-4 gap-5">
 
-                    <ng-container *ngIf="$isUpdating | async; then loadingClients else clientList" />
-
-                    <ng-container *ngIf="$clientsTotal | async as total; else loadingClients">
-                        <ng-container *ngIf="total === 0;">
-                          <span>Sem clientes para mostrar :(</span>
-                        </ng-container>
-                      </ng-container>
-            
-                      <ng-template #loadingClients>
-                        <app-loading></app-loading>
-                        <app-loading></app-loading>
-                        <app-loading></app-loading>
-                        <app-loading></app-loading>
-                      </ng-template>
-            
-                      <ng-template #clientList>
-                        <app-card *ngFor="let client of $clients | async" [client]="client"></app-card>
-                      </ng-template>
-                      
-                    
+<div class="w-full flex flex-col items-center py-8 bg-[#D9D9D9]">
+    <div class=" w-(--container-teddy)">
+        <div class="flex flex-col gap-2.5">
+            <!-- Filtros -->
+            <div class="filter-options flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0">
+                <span class="text-sm sm:text-base"><strong>{{ $clientsTotal | async }}</strong> clientes encontrados</span>
+                <div class="flex items-center gap-2">
+                    <p class="text-sm sm:text-base">Clientes por página:</p>
+                    <select class="p-1 border border-gray-300 rounded">
+                        <option value="16">16</option>
+                    </select>
                 </div>
+            </div>
 
-    
-                <div class="flex justify-center rounded-sm h-10 items-center border-2 border-solid border-[#EC6724]">
-                    <button (click)="handleCreateClient()" class="text-[#EC6724] font-bold text-[14px]"> Criar cliente </button>
-                </div>
-    
+            <!-- Grid de Clientes -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                <ng-container *ngIf="$isUpdating | async; then loadingClients else clientList"></ng-container>
+
+                <ng-container *ngIf="$clientsTotal | async as total; else loadingClients">
+                    <ng-container *ngIf="total === 0;">
+                        <span class="text-center text-gray-500">Sem clientes para mostrar :(</span>
+                    </ng-container>
+                </ng-container>
+
+                <ng-template #loadingClients>
+                    <app-loading></app-loading>
+                    <app-loading></app-loading>
+                    <app-loading></app-loading>
+                    <app-loading></app-loading>
+                </ng-template>
+
+                <ng-template #clientList>
+                    <app-card *ngFor="let client of clients$ | async" [client]="client"></app-card>
+                </ng-template>
+            </div>
+
+            <!-- Botão de Criar Cliente -->
+            <div class="flex justify-center">
+                <button (click)="handleCreateClient()" class="mt-4 px-4 py-2 rounded-sm border-2 border-[#EC6724] text-[#EC6724] font-bold text-sm hover:bg-[#EC6724] hover:text-white transition-colors">
+                    Criar cliente
+                </button>
             </div>
         </div>
     </div>
 </div>
 
 <app-modal />
-

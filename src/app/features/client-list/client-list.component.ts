@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { clientResponseBody } from '../../interfaces/client';
 import { selectAllClientes, selectStateUpdating } from '../../store/clients/get/clients.selectos';
@@ -9,6 +9,7 @@ import { ModalService } from '../../services/modal/modal.service';
 import { ModalComponent } from "../../ui/modal/modal.component";
 import { formEnum } from '../../enum/form.enum';
 import { LoadingComponent } from "../../ui/loading/loading.component";
+import { allSelectedClients } from '../../store/clients/seleted/select.client.selectos';
 
 @Component({
   selector: 'app-client-list',
@@ -23,24 +24,18 @@ export class ClientListComponent implements OnInit {
     private modalService: ModalService
   ){}
 
-  $clients: Observable<clientResponseBody[]> = of([]);
+  @Input()
+  clients$: Observable<clientResponseBody[]> = of([]);
+  
   $isUpdating: Observable<boolean> = of(false);
   $clientsTotal: Observable<number> | undefined = of(0);
   isLoading: boolean = true;  
 
   ngOnInit(): void {
     // Carrega os clientes do store
-    const clients$ = this.store.select(selectAllClientes).pipe(
-      shareReplay(1),
-      tap((clients) => {
-        this.isLoading = false; // Define isLoading como false após carregar os dados
-      })
-    );
-
 
     // Atribui os observables
-    this.$clients = clients$;
-    this.$clientsTotal = clients$.pipe(
+    this.$clientsTotal = this.clients$.pipe(
       map((clients) => clients?.length ) 
     );
 
@@ -49,6 +44,8 @@ export class ClientListComponent implements OnInit {
         this.isLoading = isUpdating;
       })
     );
+
+    console.log(this.clients$, 'input')
    
   }
 
