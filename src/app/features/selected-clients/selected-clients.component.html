@@ -2,7 +2,6 @@
     <div class="row extranet-outlet-wrapper">
       <app-header></app-header>
 
-      {{ clientsFromStore$ | async }}
 
       <app-client-list [clients$]="clientsFromStore$"/>
       <div>
