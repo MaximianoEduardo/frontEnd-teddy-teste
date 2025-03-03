@@ -20,7 +20,9 @@ import { ClientsEffects } from './store/clients/get/clients.effects';
 import { clientsFeatureKey, clientReducer } from './store/clients/get/clients.reducers';
 import { SelectClientsEffects } from './store/clients/seleted/select.client.effects';
 import { selectedClientsFeatureKey, selectedClientReducer } from './store/clients/seleted/select.client.reducers';
-
+import { UserEffects } from './store/user/user.effects';
+import { userFeatureKey, userReducer } from './store/user/user.reducer';
+import { localStorageSync } from 'ngrx-store-localstorage';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -40,14 +42,27 @@ export const appConfig: ApplicationConfig = {
     }), 
     importProvidersFrom(
       RouterModule.forRoot(routes),
-      StoreModule.forRoot({}),
+      StoreModule.forRoot(appReducer, {
+        metaReducers: [
+          (reducer) => localStorageSync({
+            keys: [
+              userFeatureKey,
+              clientsFeatureKey,
+              selectedClientsFeatureKey
+            ],
+            rehydrate: true,
+            restoreDates: true
+          })(reducer)
+        ]
+      }),
       EffectsModule.forRoot([]),
+      StoreModule.forFeature(userFeatureKey, userReducer),
       StoreModule.forFeature(clientsFeatureKey, clientReducer),
       StoreModule.forFeature(createClientsFeatureKey, createClientReducer),
       StoreModule.forFeature(deleteClientsFeatureKey, deleteClientReducer),
       StoreModule.forFeature(editClientsFeatureKey, editClientReducer),
       StoreModule.forFeature(selectedClientsFeatureKey, selectedClientReducer),
-      EffectsModule.forFeature([ClientsEffects, CreateClientsEffects, EditClientsEffects, DeleteClientsEffects, SelectClientsEffects]),
+      EffectsModule.forFeature([UserEffects, ClientsEffects, CreateClientsEffects, EditClientsEffects, DeleteClientsEffects, SelectClientsEffects]),
       CustomStoreModule,
       ClientDispatchService
     ),
