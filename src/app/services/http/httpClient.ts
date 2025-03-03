@@ -21,7 +21,7 @@ export default class CustomHttpClient {
     }
 
     getAllClients(page: number, limit: number): Observable<responseBody>{
-        const urlClients = `${this.defaultConfig.baseUrl}/api/users?page=${page}&limit=${limit}`;
+        const urlClients = `${this.defaultConfig.baseUrl}/users?page=${page}&limit=${limit}`;
 
         return this.http.get<responseBody>(urlClients, {
             headers: {
@@ -44,7 +44,7 @@ export default class CustomHttpClient {
     }
 
     createClient(payload: clientBody): Observable<clientResponseBody>{
-        const url = `${this.defaultConfig.baseUrl}/api/users`;
+        const url = `${this.defaultConfig.baseUrl}/users`;
         return this.http.post<clientResponseBody>(url, payload, {
             observe: 'response'
         }).pipe(
@@ -62,7 +62,7 @@ export default class CustomHttpClient {
     }
 
     editClient(id: number, payload: clientBody): Observable<clientResponseBody>{
-        const url = `${this.defaultConfig.baseUrl}/api/users/${id}`;
+        const url = `${this.defaultConfig.baseUrl}/users/${id}`;
         return this.http.patch<clientResponseBody>(url, payload, {
             observe: 'response'
         }).pipe(
@@ -80,7 +80,7 @@ export default class CustomHttpClient {
     }
 
     deleteClient(id: number): Observable<string>{
-        const url = `${this.defaultConfig.baseUrl}/api/users/${id}`;
+        const url = `${this.defaultConfig.baseUrl}/users/${id}`;
         return this.http.delete(url, { observe: 'response' }).pipe(
             map((response: HttpResponse<any>) => {
                 if(response.body){
