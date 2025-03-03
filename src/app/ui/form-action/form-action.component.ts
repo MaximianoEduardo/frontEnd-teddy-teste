@@ -12,6 +12,7 @@ import { editClient } from '../../store/clients/edit/edit.client.actions';
 import { selectClient } from '../../store/clients/edit/edit.client.selectos';
 import { Subscription } from 'rxjs';
 import { selectClientById } from '../../store/clients/get/clients.selectos';
+import { ToasterService } from '../../services/toaster/toaster.service';
 
 
 
@@ -36,7 +37,9 @@ export class FormActionComponent implements OnInit, OnDestroy {
 
   constructor(
       public modalService: ModalService, 
-      private store: Store) 
+      private store: Store,
+      public toasterService: ToasterService
+  ) 
   {}
 
   ngOnInit(): void {
@@ -79,12 +82,15 @@ export class FormActionComponent implements OnInit, OnDestroy {
     switch (type) {
       case formEnum.create:
         this.store.dispatch(createClient({ payload: clientData }));
+        this.toasterService.show('Aguarde um momento estamos criando o cliente novo', 'info');
         break;
       case formEnum.edit:
         this.store.dispatch(editClient({ id: this.type().id! , payload: clientData }));
+        this.toasterService.show('Aguarde um momento estamos alterando dados do cliente', 'info');
         break;
       case formEnum.delete:
         this.store.dispatch(deleteClient({ id: this.type().id! }));
+        this.toasterService.show('Estamos deletando o cliente!', 'error');
         break;
       default:
         console.warn(`Tipo de ação desconhecido: ${type}`);
