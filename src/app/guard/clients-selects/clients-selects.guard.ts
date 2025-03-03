@@ -10,9 +10,6 @@ export const clientsSelectsGuard: CanActivateFn = (route, state) => {
   
   return store.select(allSelectedClients).pipe(
     map(clients => {
-
-      console.log(clients, 'from guard')
-
       if (clients && clients.length > 0) {
         return true;
       } else {
