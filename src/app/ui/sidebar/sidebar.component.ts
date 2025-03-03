@@ -33,11 +33,6 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.links.map((link) => {
-
-      if(link.name === this.router.url){
-        console.log(link);
-      }
-
     })
   }
 

@@ -21,7 +21,6 @@ export class CreateClientsEffects {
             exhaustMap(({payload}) => this.clientsService.createClient(payload)
             .pipe(
                 map(payload => (createClientSucess({ payload }))),
-                tap((client) => console.log('Obj: ', client)),
                 catchError((error) => EMPTY)
             ))
         );

@@ -30,17 +30,10 @@ export class ClientsService {
   }
 
   deleteClient(id: number): Observable<string>{
-    console.log(id, 'service')
     return this.customHttp.deleteClient(id);
   }
 
    selectClient(client: clientResponseBody): Observable<clientResponseBody[]>{
-    console.log('chegou no service', client);
-
-
-    console.log(this.store.select(allSelectedClients).pipe(
-      map((i) => console.log(i))
-    ))
 
     const listOfClients = this.store.select(allSelectedClients).pipe(
       map((clientStore) => {

@@ -21,7 +21,6 @@ export class ClientsEffects {
             ofType(getAllClients),
             exhaustMap(({ page, limit }) => this.clientsService.getAll(page, limit).pipe(
                 map(response => getAllClientsSucess({ response, isloading })),
-                tap((response) => console.log(response)),
                 catchError((error) => EMPTY)
             ))
         );

@@ -22,10 +22,8 @@ export class SelectClientsEffects {
             ofType(selectClient),
             exhaustMap(({ payload }) => this.clientsService.selectClient(payload).pipe(
                 map((payload) => {
-                    console.log(payload)
                    //this.router.navigate(['/dashboard/selected-clients']) 
                 }),
-                tap((response) => console.log(response, 'loadClientsSelecteds')),
                 catchError((error) => EMPTY)
             ))
         );

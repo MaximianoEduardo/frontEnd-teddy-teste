@@ -81,7 +81,6 @@ export default class CustomHttpClient {
 
 
     deleteClient(id: number): Observable<string>{
-        console.log('chegou no delete', id)
         return this.http.delete(`/api/users/${id}`, { observe: 'response' }).pipe(
             map((response: HttpResponse<any>) => {
                 if(response.body){
