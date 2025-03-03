@@ -12,5 +12,5 @@ export const showAllSelectedClients = createAction(
 
 export const removeSelectedClient = createAction(
     '[Dashboard Remover Cliente Selecionado] Removendo Cliente Selecionado',
-    props<{ payload: clientResponseBody }>()
+    props<{ client: clientResponseBody }>()
 );

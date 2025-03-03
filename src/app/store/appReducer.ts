@@ -4,19 +4,9 @@ import { createClientReducer, createClientsFeatureKey } from './clients/create/c
 import { editClientReducer, editClientsFeatureKey } from './clients/edit/edit.client.reducers';
 import { deleteClientReducer, deleteClientsFeatureKey } from './clients/delete/delete.client.reducers';
 import { selectedClientReducer, selectedClientsFeatureKey } from './clients/seleted/select.client.reducers';
+import { userFeatureKey, userReducer } from './user/user.reducer';
 
-export interface AppState {
-  [clientsFeatureKey]: ReturnType<typeof clientReducer>;
-  [createClientsFeatureKey]: ReturnType<typeof createClientReducer>;
-  [editClientsFeatureKey]: ReturnType<typeof editClientReducer>;
-  [deleteClientsFeatureKey]: ReturnType<typeof deleteClientReducer>;
-  [selectedClientsFeatureKey]: ReturnType<typeof selectedClientReducer>;
-}
-
-export const appReducer: ActionReducerMap<AppState> = {
+export const appReducer: ActionReducerMap<any> = {
   [clientsFeatureKey]: clientReducer,
-  [createClientsFeatureKey]: createClientReducer,
-  [editClientsFeatureKey]: editClientReducer,
-  [deleteClientsFeatureKey]: deleteClientReducer,
-  [selectedClientsFeatureKey]: selectedClientReducer,
+  [userFeatureKey]: userReducer,
 };

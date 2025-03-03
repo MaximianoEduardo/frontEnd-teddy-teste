@@ -15,13 +15,15 @@ export const selectedClientReducer = createReducer(
     initialState,
     on(selectClient, (state, { payload }) => ({
         ...state,
-        payload: [...state.payload, payload],
+        payload: state.payload.some(client => client.id === payload.id) 
+            ? state.payload 
+            : [...state.payload, payload],
     })),
     on(showAllSelectedClients, (state) => ({
         ...state,
         
     })),
-    on(removeSelectedClient, (state, { payload }) => ({
+    on(removeSelectedClient, (state, { client: payload }) => ({
         ...state,
         payload: state.payload.filter(client => client.id !== payload.id)
     }))

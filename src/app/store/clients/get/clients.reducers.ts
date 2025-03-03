@@ -5,17 +5,22 @@ import { getAllClients, getAllClientsSucess, getAllClientsFail } from "./clients
 export const clientsFeatureKey = 'clients';
 
 export interface initialState {
-    clients: clientResponseBody[];
+    response: {
+
+        clients: clientResponseBody[];
+        currentPage: number,
+        totalPages: number,
+    };
     isloading: boolean;
-    currentPage: number,
-    totalPages: number,
     error?: string
 }
 export const initialState: initialState = {
-    clients: [],
+    response: {
+        clients: [],
+        currentPage: 1,
+        totalPages: 1
+    },
     isloading: false,
-    currentPage: 1,
-    totalPages: 1
 };
 
 export const clientReducer = createReducer(

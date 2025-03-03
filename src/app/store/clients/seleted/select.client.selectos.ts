@@ -3,7 +3,7 @@ import {  clientResponseBody } from '../../../interfaces/client';
 import { selectedClientsFeatureKey } from './select.client.reducers';
 
 export interface FeatureState {
-  response: clientResponseBody[]
+  payload: clientResponseBody[]
 }
 
 export const selectDashboardState = selectedFeatureSelector<FeatureState>(selectedClientsFeatureKey);
@@ -11,6 +11,6 @@ export const selectDashboardState = selectedFeatureSelector<FeatureState>(select
 
 export const allSelectedClients = createSelector(
   selectDashboardState,
-  (state) => state.response
+  (state) => state.payload  
 );
 
