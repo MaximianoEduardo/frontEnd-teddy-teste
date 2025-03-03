@@ -43,13 +43,11 @@ export class ClientListComponent implements OnInit {
       tap((isUpdating) => {
         this.isLoading = isUpdating;
       })
-    );
-
-    console.log(this.clients$, 'input')
-   
+    );   
   }
 
 
+  
   handleCreateClient(){
     this.modalService.openModal({
       title: 'Criar cliente',
