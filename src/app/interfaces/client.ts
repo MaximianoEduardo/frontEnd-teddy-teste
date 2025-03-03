@@ -5,8 +5,9 @@ export interface clientResponseBody {
     name: string
     salary: number;
     companyValuation: number;
-    createdAt: Date
-    updatedAt: Date
+    createdAt: Date;
+    updatedAt: Date;
+    isSelected?: boolean;
 }
 
 export interface responseBody {
