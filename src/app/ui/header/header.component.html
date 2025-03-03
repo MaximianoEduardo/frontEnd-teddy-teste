@@ -1,19 +1,21 @@
 <div class="w-full bg-white flex justify-center shadow-[0px_2px_2px_0px_#0000001A] ">
     <div class="w-(--container-teddy) h-[100px] flex items-center justify-between relative">
 
-        <div class="flex w-full justify-center md:grid md:grid-cols-3 grid-cols-1">
+        <div class="flex w-full md:grid md:grid-cols-3 grid-cols-1">
+
+            <div class="flex justify-start items-center">
+                <app-sidebar class="sidebar flex justify-center items-center"/>
     
-            <div class="sidebar absolute left-[0] absolute-transform">
-                <app-sidebar />
+                <div class="logo pl-[48px] ml:m-0">
+                <a routerLink="/">
+                    <img class="max-w-[100px] max-h-[49px]" src="/logo.png" alt="logo">
+                </a> 
+                </div>
             </div>
     
-            <div class="logo ml-12 ml:m-0">
-               <a routerLink="/">
-                <img class="max-w-[100px] max-h-[49px]" src="/logo.png" alt="logo">
-               </a> 
-            </div>
             
-            <div class="hidden lg:flex lg:items-center lg:gap-8">
+            
+            <div class="hidden lg:flex lg:items-center justify-center lg:gap-8">
                 <nav>
                     <ul class="flex gap-4 md:gap-6 lg:gap-8">
                         <li class="text-sm md:text-base lg:text-lg"> 
@@ -22,7 +24,7 @@
                         <li class="text-sm md:text-base lg:text-lg"> 
                             <a routerLink="/dashboard/selected-clients" routerLinkActive="active" ariaCurrentWhenActive="page" >Clientes Selecionados</a> 
                         </li>
-                        <li class="text-sm md:text-base lg:text-lg"> Sair</li>
+                        <li class="text-sm md:text-base lg:text-lg cursor-pointer" (click)="logoutUser()"> Sair</li>
                     </ul>
                 </nav>
                 
@@ -32,7 +34,7 @@
     
         <!-- Informações do usuário -->
         <div class="hidden lg:flex lg:items-center lg:justify-end lg:gap-2">
-            <p class="text-sm md:text-base lg:text-lg">Olá, <strong>Usuário</strong></p>
+            <p class="text-sm md:text-base lg:text-lg">Olá, <strong>{{ user$ | async }}</strong></p>
         </div>
     
     

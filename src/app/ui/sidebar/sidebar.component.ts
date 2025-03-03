@@ -41,8 +41,8 @@ export class SidebarComponent implements OnInit {
     })
   }
 
-  open(){
-
+  toggle(){
+    this.isActive = !this.isActive
   }
 
 }

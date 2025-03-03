@@ -1,13 +1,13 @@
 import { CommonModule, CurrencyPipe } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { clientResponseBody } from '../../interfaces/client';
 import { ModalService } from '../../services/modal/modal.service';
 import { formType } from '../../interfaces/forms';
 import { formEnum } from '../../enum/form.enum';
 import { LoadingComponent } from "../loading/loading.component";
-import { Store } from '@ngrx/store';
-import { selectClient } from '../../store/clients/seleted/select.client.actions';
 import { ClientDispatchService } from '../../services/events.service';
+import { map, Observable, of } from 'rxjs';
+import { ToasterService } from '../../services/toaster/toaster.service';
 
 @Component({
   selector: 'app-card',
@@ -15,7 +15,9 @@ import { ClientDispatchService } from '../../services/events.service';
   templateUrl: './card.component.html',
   styleUrl: './card.component.css'
 })
-export class CardComponent {
+export class CardComponent implements OnInit{
+
+  isOnlist$: Observable<boolean> = of(false)
 
   @Input()
   isUpdating: boolean = false;
@@ -44,6 +46,8 @@ export class CardComponent {
   }
 
   ngOnInit(): void {
+
+
     this.deleteModal = {
       title: 'Excluir cliente',
       nameOfClient: this.client.name,
@@ -58,15 +62,41 @@ export class CardComponent {
       type: formEnum.edit
     }
 
+    this.isOnSelectedList(this.client);
+
   }
 
   
   handleClickSelectClient(payload: clientResponseBody){
+    this.toasterService.show(`Cliente ${payload.name} adicionado com sucesso!`, 'success');
     this.dispatchService.dispatchSelectClient(payload);
+    
   }
+
+  handleRemoveSelectClient(client: clientResponseBody){
+    this.toasterService.show(`Cliente ${client.name} removido com sucesso!`, 'info');
+    this.dispatchService.dispatchRemoveSelectClient(client)
+  }
+
+
+
+  isOnSelectedList(client: clientResponseBody): Observable<boolean>{
+
+   return this.isOnlist$ = this.dispatchService.dispatchGetAllSelectsClients().pipe(
+      map((clients) => {
+        
+        return clients.some(selectedClient => selectedClient.id === client.id);        
+
+      })
+    );
+  }
+
+
+
 
   constructor(
     public modalService: ModalService,
     public dispatchService: ClientDispatchService,
+    public toasterService: ToasterService
   ){}
 }
