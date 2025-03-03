@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
   onSubmit(){
     this.profileForm.markAllAsTouched();
     if (this.profileForm.valid) {
+      this.dispatchService.dispatchLoginUser(this.profileForm.value.name)
       this.dispatchService.dispatchGetAllClients(1, 16, true );
       this.router.navigate(['/dashboard'])
     }
